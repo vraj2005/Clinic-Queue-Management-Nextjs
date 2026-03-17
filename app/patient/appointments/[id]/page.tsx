@@ -42,7 +42,8 @@ export default function AppointmentDetails() {
           <b>Date:</b> {details.appointmentDate} &nbsp; <b>Time:</b> {details.timeSlot}
         </p>
         <p>
-          <b>Token:</b> {details.queueEntry?.tokenNumber ?? "-"} &nbsp; <b>Status:</b> {details.status}
+          <b>Token:</b> {details.queueEntry?.tokenNumber ?? "-"} &nbsp; <b>Status:</b>{" "}
+          {details.queueEntry?.status || details.status}
         </p>
       </div>
 

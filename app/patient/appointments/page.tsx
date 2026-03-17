@@ -38,7 +38,7 @@ export default function MyAppointments() {
             <tr key={a.id}>
               <td>{a.appointmentDate}</td>
               <td>{a.timeSlot}</td>
-              <td>{a.status}</td>
+              <td>{a.queueEntry?.status || a.status}</td>
               <td>{a.queueEntry?.tokenNumber}</td>
               <td>
                 <Link href={`/patient/appointments/${a.id}`}>

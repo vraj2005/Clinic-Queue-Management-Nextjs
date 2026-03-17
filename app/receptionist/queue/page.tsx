@@ -57,22 +57,40 @@ export default function QueuePage() {
         <tbody>
           {queue.map((q) => (
             <tr key={q.id}>
-              <td>{q.tokenNumber}</td>
-              <td>{q.appointment?.patient?.name}</td>
-              <td>{q.appointment?.patient?.phone || "-"}</td>
-              <td>{q.appointment?.timeSlot}</td>
-              <td>{q.status}</td>
-              <td>
-                <button onClick={() => changeStatus(q.id, "in-progress")}>
-                  Start
-                </button>
+              {(() => {
+                const currentStatus = q.status;
+                const normalizedStatus = currentStatus === "in_progress" ? "in-progress" : currentStatus;
+                const isWaiting = normalizedStatus === "waiting";
+                const isInProgress = normalizedStatus === "in-progress";
 
-                <button onClick={() => changeStatus(q.id, "done")}>Done</button>
+                return (
+                  <>
+                    <td>{q.tokenNumber}</td>
+                    <td>{q.appointment?.patient?.name}</td>
+                    <td>{q.appointment?.patient?.phone || "-"}</td>
+                    <td>{q.appointment?.timeSlot}</td>
+                    <td>{q.status}</td>
+                    <td>
+                      {isWaiting ? (
+                        <>
+                          <button onClick={() => changeStatus(q.id, "in-progress")}>
+                            In progress
+                          </button>
+                          <button onClick={() => changeStatus(q.id, "skipped")}>
+                            Skip
+                          </button>
+                        </>
+                      ) : null}
 
-                <button onClick={() => changeStatus(q.id, "skipped")}>
-                  Skip
-                </button>
-              </td>
+                      {isInProgress ? (
+                        <button onClick={() => changeStatus(q.id, "done")}>
+                          Done
+                        </button>
+                      ) : null}
+                    </td>
+                  </>
+                );
+              })()}
             </tr>
           ))}
         </tbody>
