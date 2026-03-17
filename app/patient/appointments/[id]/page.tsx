@@ -11,6 +11,8 @@ export default function AppointmentDetails() {
   const appointmentId = Array.isArray(params.id) ? params.id[0] : params.id;
   const [details, setDetails] = useState<any>(null);
 
+  const formatDate = (value: string) => value?.split("T")[0] || value;
+
   const loadDetails = async (id: number) => {
     const data = await getAppointmentDetails(id);
     setDetails(data);
@@ -25,61 +27,93 @@ export default function AppointmentDetails() {
   }, [appointmentId]);
 
   if (!details) {
-    return <p style={{ padding: "30px" }}>Loading...</p>;
+    return <p className="p-8">Loading...</p>;
   }
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Appointment Details</h2>
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto w-full max-w-4xl px-6 py-10">
+        <Link
+          className="text-sm font-semibold text-emerald-700"
+          href="/patient/appointments"
+        >
+          Back to appointments
+        </Link>
 
-      <p>
-        <Link href="/patient/appointments">Back to appointments</Link>
-      </p>
+        <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold text-slate-900">
+          Appointment details
+        </h2>
 
-      <div style={{ marginTop: "20px", border: "1px solid #e5e7eb", padding: "16px" }}>
-        <h4>Appointment</h4>
-        <p>
-          <b>Date:</b> {details.appointmentDate} &nbsp; <b>Time:</b> {details.timeSlot}
-        </p>
-        <p>
-          <b>Token:</b> {details.queueEntry?.tokenNumber ?? "-"} &nbsp; <b>Status:</b>{" "}
-          {details.queueEntry?.status || details.status}
-        </p>
-      </div>
+        <div className="mt-6 rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm">
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-emerald-500">
+            Appointment
+          </h4>
+          <p className="mt-4 text-sm text-slate-600">
+            <span className="font-semibold text-slate-800">Date:</span>{" "}
+            {formatDate(details.appointmentDate)}
+            <span className="ml-4 font-semibold text-slate-800">Time:</span> {details.timeSlot}
+          </p>
+          <p className="mt-2 text-sm text-slate-600">
+            <span className="font-semibold text-slate-800">Token:</span>{" "}
+            {details.queueEntry?.tokenNumber ?? "-"}
+            <span className="ml-4 font-semibold text-slate-800">Status:</span>{" "}
+            {details.queueEntry?.status || details.status}
+          </p>
+        </div>
 
-      <div style={{ marginTop: "16px", border: "1px solid #e5e7eb", padding: "16px" }}>
-        <h4>Medicines (Prescription)</h4>
-        {details.prescription?.medicines?.length ? (
-          <ul>
-            {details.prescription.medicines.map((m: any, index: number) => (
-              <li key={`${m.name}-${index}`}>
-                {m.name} - {m.dosage} - {m.duration}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No prescription added for this appointment yet.</p>
-        )}
-        {details.prescription?.notes ? <p><b>Notes:</b> {details.prescription.notes}</p> : null}
-      </div>
-
-      <div style={{ marginTop: "16px", border: "1px solid #e5e7eb", padding: "16px" }}>
-        <h4>Medical Report</h4>
-        {details.report ? (
-          <div>
-            <p>
-              <b>Diagnosis:</b> {details.report.diagnosis}
+        <div className="mt-6 rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm">
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-emerald-500">
+            Medicines (Prescription)
+          </h4>
+          {details.prescription?.medicines?.length ? (
+            <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              {details.prescription.medicines.map((m: any, index: number) => (
+                <li key={`${m.name}-${index}`}>
+                  <span className="font-semibold text-slate-800">Medicine:</span> {m.name}
+                  {" | "}
+                  <span className="font-semibold text-slate-800">Dosage:</span> {m.dosage}
+                  {" | "}
+                  <span className="font-semibold text-slate-800">Duration:</span> {m.duration}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-4 text-sm text-slate-500">
+              No prescription added for this appointment yet.
             </p>
-            <p>
-              <b>Test Recommended:</b> {details.report.testRecommended}
+          )}
+          {details.prescription?.notes ? (
+            <p className="mt-3 text-sm text-slate-600">
+              <span className="font-semibold text-slate-800">Notes:</span> {details.prescription.notes}
             </p>
-            <p>
-              <b>Remarks:</b> {details.report.remarks}
+          ) : null}
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm">
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-emerald-500">
+            Medical report
+          </h4>
+          {details.report ? (
+            <div className="mt-4 space-y-2 text-sm text-slate-600">
+              <p>
+                <span className="font-semibold text-slate-800">Diagnosis:</span>{" "}
+                {details.report.diagnosis}
+              </p>
+              <p>
+                <span className="font-semibold text-slate-800">Test Recommended:</span>{" "}
+                {details.report.testRecommended}
+              </p>
+              <p>
+                <span className="font-semibold text-slate-800">Remarks:</span>{" "}
+                {details.report.remarks}
+              </p>
+            </div>
+          ) : (
+            <p className="mt-4 text-sm text-slate-500">
+              No report added for this appointment yet.
             </p>
-          </div>
-        ) : (
-          <p>No report added for this appointment yet.</p>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

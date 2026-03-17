@@ -36,48 +36,55 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900">
-      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center px-6 py-12 lg:flex-row lg:items-stretch lg:justify-between">
-        <div className="mb-10 flex w-full max-w-lg flex-col justify-center text-white lg:mb-0">
-          <p className="text-sm uppercase tracking-[0.3em] text-indigo-200">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.12),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(59,130,246,0.12),_transparent_60%)]">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-center gap-12 px-6 py-12 lg:flex-row">
+        <div className="w-full max-w-lg">
+          <p className="text-xs uppercase tracking-[0.35em] text-emerald-600">
             Clinic Queue Management
           </p>
-          <h1 className="mt-4 text-4xl font-semibold leading-tight">
+          <h1 className="mt-4 font-[var(--font-display)] text-4xl font-semibold text-slate-900 sm:text-5xl">
             Welcome back, Admin
           </h1>
-          <p className="mt-4 text-base text-indigo-100/80">
-            Sign in to manage your clinic, users, and daily queue in one place.
+          <p className="mt-4 text-base text-slate-600">
+            Keep your clinic operations steady with one clean workspace for users,
+            appointments, and queue updates.
           </p>
-          <div className="mt-8 grid grid-cols-2 gap-4 text-sm text-indigo-100/80">
-            <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
-              <p className="text-xs uppercase text-indigo-200">Secure</p>
-              <p className="mt-2 font-medium">Token based access</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-100 bg-white px-5 py-4 shadow-sm">
+              <p className="text-xs uppercase text-emerald-500">Secure</p>
+              <p className="mt-2 text-sm font-semibold text-slate-800">
+                Token based access
+              </p>
+              <p className="mt-1 text-xs text-slate-500">Role guarded endpoints</p>
             </div>
-            <div className="rounded-2xl border border-white/15 bg-white/5 p-4">
-              <p className="text-xs uppercase text-indigo-200">Fast</p>
-              <p className="mt-2 font-medium">Realtime queue updates</p>
+            <div className="rounded-2xl border border-sky-100 bg-white px-5 py-4 shadow-sm">
+              <p className="text-xs uppercase text-sky-600">Reliable</p>
+              <p className="mt-2 text-sm font-semibold text-slate-800">
+                Real time queue flow
+              </p>
+              <p className="mt-1 text-xs text-slate-500">Sync across roles</p>
             </div>
           </div>
         </div>
 
-        <div className="w-full max-w-md self-center rounded-3xl border border-white/15 bg-white/10 p-8 text-white shadow-2xl backdrop-blur">
+        <div className="w-full max-w-md rounded-3xl border border-emerald-100 bg-white p-8 shadow-lg">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-lg font-semibold">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-lg font-semibold text-white">
               CM
             </div>
             <div>
-              <p className="text-lg font-semibold">Admin Login</p>
-              <p className="text-sm text-indigo-100/80">Use your institute credentials</p>
+              <p className="text-lg font-semibold text-slate-900">Admin Login</p>
+              <p className="text-sm text-slate-500">Use your institute credentials</p>
             </div>
           </div>
 
           <div className="mt-8 space-y-5">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wide text-indigo-100/80">
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Email ID
               </label>
               <input
-                className="mt-2 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-indigo-100/60 focus:border-indigo-300 focus:outline-none"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none"
                 placeholder="24010101666@darshan.ac.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -85,13 +92,13 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wide text-indigo-100/80">
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Password
               </label>
               <input
-                className="mt-2 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-indigo-100/60 focus:border-indigo-300 focus:outline-none"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none"
                 type="password"
-                placeholder="••••••••"
+                placeholder="password123"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -100,13 +107,13 @@ export default function LoginPage() {
 
           <button
             onClick={handleLogin}
-            className="mt-8 w-full rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-indigo-100"
+            className="mt-8 w-full rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
           >
             Sign in
           </button>
 
-          <p className="mt-6 text-center text-xs text-indigo-100/70">
-            Make sure you log in before opening dashboard pages.
+          <p className="mt-6 text-center text-xs text-slate-400">
+            Log in before opening protected pages.
           </p>
         </div>
       </div>

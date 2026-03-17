@@ -13,30 +13,30 @@ export default function ReceptionistNavbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-teal-200 bg-teal-700 text-white">
+    <nav className="sticky top-0 z-50 border-b border-emerald-200/60 bg-white/90 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-6 px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-sm font-semibold text-teal-700">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-600 text-sm font-semibold text-white">
             CQ
           </div>
           <div>
-            <p className="text-sm font-semibold">Clinic Queue</p>
-            <p className="text-xs text-teal-100">Receptionist</p>
+            <p className="text-sm font-semibold text-slate-900">Clinic Queue</p>
+            <p className="text-xs text-emerald-600">Receptionist Desk</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-5 text-sm font-medium text-teal-50">
-          <Link className="transition hover:text-white" href="/receptionist/queue">
+        <div className="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-600">
+          <Link className="transition hover:text-emerald-700" href="/receptionist/queue">
             Queue (manage)
           </Link>
-          <Link className="transition hover:text-white" href="/receptionist/tv">
+          <Link className="transition hover:text-emerald-700" href="/receptionist/tv">
             TV display
           </Link>
         </div>
 
         <button
           onClick={handleLogout}
-          className="ml-auto rounded-full bg-teal-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-500"
+          className="ml-auto rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:border-emerald-300 hover:text-emerald-800"
         >
           Logout
         </button>

@@ -31,39 +31,74 @@ export default function AddReport() {
   };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Add Report</h2>
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto w-full max-w-4xl px-6 py-10">
+        <div className="rounded-3xl border border-emerald-100 bg-white p-8 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.25em] text-emerald-500">
+            Add Medical Report
+          </p>
+          <h2 className="mt-2 font-[var(--font-display)] text-2xl font-semibold text-slate-900">
+            Diagnosis summary
+          </h2>
+          <p className="mt-2 text-sm text-slate-500">
+            Capture the diagnosis, tests, and remarks for the appointment.
+          </p>
 
-      <input
-        placeholder="Appointment ID"
-        value={appointmentId}
-        onChange={(e) => setAppointmentId(e.target.value)}
-      />
-      <br />
-      <br />
+          <div className="mt-6 grid gap-4">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                Appointment ID
+              </label>
+              <input
+                placeholder="Appointment ID"
+                value={appointmentId}
+                onChange={(e) => setAppointmentId(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-emerald-300 focus:outline-none"
+              />
+            </div>
 
-      <input
-        placeholder="Diagnosis"
-        onChange={(e) => setDiagnosis(e.target.value)}
-      />
-      <br />
-      <br />
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                Diagnosis
+              </label>
+              <input
+                placeholder="Viral fever"
+                onChange={(e) => setDiagnosis(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-emerald-300 focus:outline-none"
+              />
+            </div>
 
-      <input
-        placeholder="Test Recommended"
-        onChange={(e) => setTest(e.target.value)}
-      />
-      <br />
-      <br />
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                Test recommended (optional)
+              </label>
+              <input
+                placeholder="Blood test"
+                onChange={(e) => setTest(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-emerald-300 focus:outline-none"
+              />
+            </div>
 
-      <input
-        placeholder="Remarks"
-        onChange={(e) => setRemarks(e.target.value)}
-      />
-      <br />
-      <br />
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                Remarks (optional)
+              </label>
+              <input
+                placeholder="Rest for 3 days"
+                onChange={(e) => setRemarks(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-emerald-300 focus:outline-none"
+              />
+            </div>
+          </div>
 
-      <button onClick={submit}>Submit</button>
+          <button
+            onClick={submit}
+            className="mt-6 rounded-full bg-emerald-600 px-6 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500"
+          >
+            Save report
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

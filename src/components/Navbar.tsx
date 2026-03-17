@@ -13,7 +13,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-emerald-200 bg-white/90 backdrop-blur">
+    <nav className="sticky top-0 z-50 border-b border-emerald-200/60 bg-white/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center gap-6 px-6 py-4">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-600 text-sm font-semibold text-white">
@@ -21,7 +21,7 @@ export default function Navbar() {
           </div>
           <div>
             <p className="text-sm font-semibold text-slate-900">Clinic CMS</p>
-            <p className="text-xs text-slate-500">Admin Panel</p>
+            <p className="text-xs text-emerald-700">Admin Workspace</p>
           </div>
         </div>
 
