@@ -10,7 +10,14 @@ export default function QueuePage() {
 
   useEffect(() => {
     checkAuth();
+    const today = new Date().toISOString().split("T")[0];
+    setDate(today);
   }, []);
+
+  useEffect(() => {
+    if (!date) return;
+    load();
+  }, [date]);
 
   const load = async () => {
     const data = await getQueue(date);
@@ -22,21 +29,26 @@ export default function QueuePage() {
     await updateQueueStatus(id, status);
 
     alert("Updated");
+    load();
   };
 
   return (
     <div style={{ padding: "30px" }}>
       <h2>Daily Queue</h2>
 
-      <input type="date" onChange={(e) => setDate(e.target.value)} />
-
-      <button onClick={load}>Load Queue</button>
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
 
       <table border={1}>
         <thead>
           <tr>
             <th>Token</th>
-            <th>Name</th>
+            <th>Patient</th>
+            <th>Phone</th>
+            <th>Time Slot</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -46,7 +58,9 @@ export default function QueuePage() {
           {queue.map((q) => (
             <tr key={q.id}>
               <td>{q.tokenNumber}</td>
-              <td>{q.appointment.patient.name}</td>
+              <td>{q.appointment?.patient?.name}</td>
+              <td>{q.appointment?.patient?.phone || "-"}</td>
+              <td>{q.appointment?.timeSlot}</td>
               <td>{q.status}</td>
               <td>
                 <button onClick={() => changeStatus(q.id, "in-progress")}>
