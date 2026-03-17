@@ -13,31 +13,37 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      style={{
-        display: "flex",
-        gap: "16px",
-        padding: "16px 24px",
-        borderBottom: "1px solid #e5e7eb",
-        alignItems: "center",
-      }}
-    >
-      <Link href="/dashboard">Dashboard</Link>
-      <Link href="/users">Users</Link>
-      <Link href="/users/create">Create User</Link>
+    <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl items-center gap-6 px-6 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white">
+            CM
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-slate-900">Clinic CMS</p>
+            <p className="text-xs text-slate-500">Admin Panel</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-5 text-sm font-medium text-slate-600">
+          <Link className="transition hover:text-slate-900" href="/dashboard">
+            Dashboard
+          </Link>
+          <Link className="transition hover:text-slate-900" href="/users">
+            Users
+          </Link>
+          <Link className="transition hover:text-slate-900" href="/users/create">
+            Create User
+          </Link>
+        </div>
+
       <button
         onClick={handleLogout}
-        style={{
-          marginLeft: "auto",
-          padding: "6px 12px",
-          border: "1px solid #e5e7eb",
-          borderRadius: "6px",
-          background: "white",
-          cursor: "pointer",
-        }}
+        className="ml-auto rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
       >
         Logout
       </button>
+      </div>
     </nav>
   );
 }

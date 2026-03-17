@@ -1,15 +1,20 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div style={{ padding: "30px" }}>
-      <h1>Clinic Queue Management</h1>
-      <p>Use the navigation bar or jump straight to login.</p>
+  const router = useRouter();
 
-      <div style={{ marginTop: "16px", display: "flex", gap: "12px" }}>
-        <Link href="/login">Login</Link>
-        <Link href="/dashboard">Dashboard</Link>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      router.push("/dashboard");
+    } else {
+      router.push("/login");
+    }
+  }, [router]);
+
+  return null;
 }
