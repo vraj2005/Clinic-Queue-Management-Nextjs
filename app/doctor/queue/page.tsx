@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getDoctorQueue } from "@/src/api/doctor.api";
 import { checkAuth } from "@/src/utils/auth";
+import Link from "next/link";
 
 export default function DoctorQueue() {
   const [data, setData] = useState<any[]>([]);
@@ -28,6 +29,7 @@ export default function DoctorQueue() {
             <th>Patient</th>
             <th>Status</th>
             <th>Appointment</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
@@ -38,6 +40,15 @@ export default function DoctorQueue() {
               <td>{q.patientName}</td>
               <td>{q.status}</td>
               <td>{q.appointmentId}</td>
+              <td>
+                <Link href={`/doctor/prescription?appointmentId=${q.appointmentId}`}>
+                  Add medicine
+                </Link>
+                {" "}
+                <Link href={`/doctor/report?appointmentId=${q.appointmentId}`}>
+                  Add report
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

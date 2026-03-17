@@ -7,21 +7,16 @@ import { checkAuth } from "@/src/utils/auth";
 export default function MyPrescriptions() {
   const [data, setData] = useState<any[]>([]);
 
-  const load = async () => {
-    const res = await getMyPrescriptions();
-    setData(res);
-  };
-
   useEffect(() => {
     checkAuth();
-    load();
+    getMyPrescriptions().then(setData);
   }, []);
 
   return (
     <div style={{ padding: "30px" }}>
       <h2>My Prescriptions</h2>
 
-      {data.length === 0 ? (
+      {!data.length ? (
         <p>No prescriptions yet.</p>
       ) : (
         <table border={1} cellPadding={8}>
@@ -39,8 +34,8 @@ export default function MyPrescriptions() {
                   {p.appointment?.appointmentDate} {p.appointment?.timeSlot}
                 </td>
                 <td>
-                  {p.medicines?.map((m: any, index: number) => (
-                    <div key={`${m.name}-${index}`}>
+                  {p.medicines?.map((m: any, i: number) => (
+                    <div key={i}>
                       {m.name} - {m.dosage} - {m.duration}
                     </div>
                   ))}

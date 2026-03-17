@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { addReport } from "@/src/api/doctor.api";
 import { checkAuth } from "@/src/utils/auth";
+import { useSearchParams } from "next/navigation";
 
 export default function AddReport() {
+  const searchParams = useSearchParams();
   const [appointmentId, setAppointmentId] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
   const [test, setTest] = useState("");
@@ -12,6 +14,10 @@ export default function AddReport() {
 
   useEffect(() => {
     checkAuth();
+    const idFromQuery = searchParams.get("appointmentId");
+    if (idFromQuery) {
+      setAppointmentId(idFromQuery);
+    }
   }, []);
 
   const submit = async () => {
@@ -30,6 +36,7 @@ export default function AddReport() {
 
       <input
         placeholder="Appointment ID"
+        value={appointmentId}
         onChange={(e) => setAppointmentId(e.target.value)}
       />
       <br />
