@@ -17,7 +17,19 @@ export default function LoginPage() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      router.push("/dashboard");
+      const role = data.user?.role;
+
+      if (role === "admin") {
+        router.push("/dashboard");
+      } else if (role === "patient") {
+        router.push("/patient/dashboard");
+      } else if (role === "doctor") {
+        router.push("/doctor/queue");
+      } else if (role === "receptionist") {
+        router.push("/receptionist/queue");
+      } else {
+        router.push("/dashboard");
+      }
     } catch (err) {
       alert("Invalid credentials");
     }

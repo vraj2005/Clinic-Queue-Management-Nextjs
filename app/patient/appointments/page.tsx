@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getMyAppointments } from "@/src/api/patient.api";
 import { checkAuth } from "@/src/utils/auth";
+import Link from "next/link";
 
 export default function MyAppointments() {
   const [data, setData] = useState<any[]>([]);
@@ -28,6 +29,7 @@ export default function MyAppointments() {
             <th>Slot</th>
             <th>Status</th>
             <th>Token</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
@@ -38,6 +40,11 @@ export default function MyAppointments() {
               <td>{a.timeSlot}</td>
               <td>{a.status}</td>
               <td>{a.queueEntry?.tokenNumber}</td>
+              <td>
+                <Link href={`/patient/appointments/${a.id}`}>
+                  Medicines & report
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

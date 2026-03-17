@@ -8,6 +8,25 @@ export default function BookAppointment() {
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
 
+  const slots = Array.from({ length: 40 }, (_, index) => {
+    const startMinutes = 9 * 60 + index * 15;
+    const endMinutes = startMinutes + 15;
+    const startHour = Math.floor(startMinutes / 60);
+    const startMinute = startMinutes % 60;
+    const endHour = Math.floor(endMinutes / 60);
+    const endMinute = endMinutes % 60;
+
+    const start = `${String(startHour).padStart(2, "0")}:${String(
+      startMinute,
+    ).padStart(2, "0")}`;
+    const end = `${String(endHour).padStart(2, "0")}:${String(endMinute).padStart(
+      2,
+      "0",
+    )}`;
+
+    return `${start}-${end}`;
+  });
+
   useEffect(() => {
     checkAuth();
   }, []);
@@ -30,10 +49,14 @@ export default function BookAppointment() {
       <br />
       <br />
 
-      <input
-        placeholder="Time Slot (10:00-10:15)"
-        onChange={(e) => setSlot(e.target.value)}
-      />
+      <select value={slot} onChange={(e) => setSlot(e.target.value)}>
+        <option value="">Select time slot</option>
+        {slots.map((time) => (
+          <option key={time} value={time}>
+            {time}
+          </option>
+        ))}
+      </select>
 
       <br />
       <br />
